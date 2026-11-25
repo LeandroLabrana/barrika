@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
+    "seed:firebase": "node --env-file=.env.local scripts/seed-firebase.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },
