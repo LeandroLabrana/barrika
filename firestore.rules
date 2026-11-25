@@ -1,0 +1,9 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Demo pública deliberadamente abierta. No usar estas reglas en producción con datos sensibles.
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

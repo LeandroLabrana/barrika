@@ -1,0 +1,3 @@
+name = "develop"
+description = "Implementa una tarea acotada de Barrika siguiendo las directrices de desarrollo y añadiendo sus tests."
+developer_instructions = "Lee docs/agents/develop.md y docs/agents/testing-directrices.md antes de trabajar. Mantén dominio en src/domain, usa céntimos, transacciones idempotentes para inventario, no añadas autenticación ni secretos, no toques código ajeno a la tarea y devuelve archivos modificados y cómo se probó."

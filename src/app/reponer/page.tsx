@@ -1,0 +1,6 @@
+import Link from "next/link";
+import { demoWines } from "@/lib/demo-data";
+import { replenishment, stockStatus } from "@/domain";
+import { Money, StockBadge } from "@/components/ui";
+import { CreateOrderButton } from "@/components/demo-actions";
+export default function ReplenishPage(){const wines=demoWines.filter(w=>stockStatus(w)!=="ok");return <><div className="page-header"><div><p className="eyebrow">Inventario</p><h1>Reponer</h1><p className="page-subtitle">Ajusta la cantidad antes de crear un pedido. Crear el pedido no mueve stock.</p></div></div><div className="panel"><div className="table-wrap"><table><thead><tr><th>Vino</th><th>Estado</th><th>Actual</th><th>Sugerencia</th><th>Coste estimado</th><th></th></tr></thead><tbody>{wines.map(w=>{const s=replenishment(w);return <tr key={w.id}><td><Link href={`/vinos/${w.id}`}><strong>{w.name}</strong><br/><span className="muted">{w.supplier||w.winery}</span></Link></td><td><StockBadge wine={w}/></td><td>{w.stock} / {w.targetStock}</td><td><input style={{maxWidth:90}} type="number" defaultValue={s.quantity}/></td><td><Money cents={s.estimatedCostCents}/></td><td><CreateOrderButton wine={w} quantity={s.quantity}/></td></tr>})}</tbody></table></div></div></>}
