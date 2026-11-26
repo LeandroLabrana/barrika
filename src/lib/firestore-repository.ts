@@ -1,4 +1,4 @@
-import { collection, doc, runTransaction, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, runTransaction, serverTimestamp, setDoc } from "firebase/firestore";
 import { getDatabase } from "./firebase";
 import { nextStock } from "@/domain";
 import type { Movement, MovementType } from "@/domain";
@@ -22,7 +22,7 @@ export async function applyMovementTransaction(movement: Omit<Movement, "resulti
 export async function saveSettings(settings: object) {
   const db = getDatabase();
   if (!db) throw new Error("Firebase no está configurado.");
-  await setDoc(doc(collection(db, "settings"), "general"), settings, { merge: true });
+  await setDoc(doc(db, "settings", "general"), settings, { merge: true });
 }
 
 export async function createOrderTransaction(order: { id: string; wineId: string; quantity: number; unitPriceExVatCents: number; estimatedCostCents: number; supplier: string }) {

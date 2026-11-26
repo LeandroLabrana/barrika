@@ -1,3 +1,5 @@
-import { demoWines } from "@/lib/demo-data";
+"use client";
+import { useAppStore } from "@/lib/app-store";
 import { OrdersClient } from "@/components/orders-client";
-export default function OrdersPage(){return <><div className="page-header"><div><p className="eyebrow">Compras</p><h1>Pedidos</h1><p className="page-subtitle">Recibe explícitamente cada pedido para sumar stock una sola vez.</p></div></div><div className="notice">Crear un pedido no mueve stock. La recepción incrementa stock una sola vez mediante una clave idempotente.</div><div className="section"><OrdersClient wines={demoWines}/></div></>}
+
+export default function OrdersPage(){const { orders }=useAppStore();return <><div className="page-header"><div><p className="eyebrow">Compras</p><h1>Pedidos</h1><p className="page-subtitle">Recibe cada pedido para actualizar las existencias de forma segura.</p></div></div><div className="notice">Los pedidos pendientes aparecen aquí hasta que confirmes su recepción.</div><div className="section"><OrdersClient/></div><p className="muted" style={{marginTop:16}}>{orders.filter(order=>order.status==="received").length} pedidos recibidos en total.</p></>}
